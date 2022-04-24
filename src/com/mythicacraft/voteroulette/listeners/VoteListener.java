@@ -32,6 +32,9 @@ public class VoteListener implements Listener {
 		Vote vote = event.getVote();
 
 		Utils.debugMessage("Recieved vote from Votifier. Username: \"" + vote.getUsername() + "\", Website: \"" + vote.getServiceName() + "\"");
+		
+		if (Bukkit.getPlayer(vote.getUsername()) == null)
+			return;
 
 		if(!vote.getUsername().trim().isEmpty()) {
 			new Thread(new VoteProcessor(vote.getUsername(), plugin, false, vote.getServiceName())).start();
